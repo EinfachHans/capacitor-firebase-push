@@ -1,6 +1,6 @@
 /// <reference types="@capacitor/cli" />
 
-import type { PermissionState, PluginListenerHandle } from "@capacitor/core";
+import type { PermissionState, PluginListenerHandle } from '@capacitor/core';
 
 export type PresentationOption = 'badge' | 'sound' | 'alert';
 
@@ -21,7 +21,7 @@ declare module '@capacitor/cli' {
        * @example ["badge", "sound", "alert"]
        */
       presentationOptions?: PresentationOption[];
-    }
+    };
   }
 }
 

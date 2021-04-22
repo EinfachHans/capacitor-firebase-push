@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.getcapacitor.Bridge;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -20,7 +19,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
@@ -42,27 +40,37 @@ public class FirebasePushPlugin extends Plugin {
 
     @PluginMethod
     public void register(PluginCall call) {
-        new Handler().post(() -> {
-            FirebaseApp.initializeApp(this.getContext());
-            registered = true;
-            this.sendStacked();
-            call.resolve();
+        new Handler()
+            .post(
+                () -> {
+                    FirebaseApp.initializeApp(this.getContext());
+                    registered = true;
+                    this.sendStacked();
+                    call.resolve();
 
-            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    this.sendToken(task.getResult());
+                    FirebaseMessaging
+                        .getInstance()
+                        .getToken()
+                        .addOnCompleteListener(
+                            task -> {
+                                if (task.isSuccessful()) {
+                                    this.sendToken(task.getResult());
+                                }
+                            }
+                        );
                 }
-            });
-        });
-
+            );
     }
 
     @PluginMethod
     public void unregister(PluginCall call) {
-        new Handler().post(() -> {
-            FirebaseInstallations.getInstance().delete();
-            call.resolve();
-        });
+        new Handler()
+            .post(
+                () -> {
+                    FirebaseInstallations.getInstance().delete();
+                    call.resolve();
+                }
+            );
     }
 
     public void sendToken(String token) {
@@ -104,7 +112,29 @@ public class FirebasePushPlugin extends Plugin {
             id = Integer.toString(n);
         }
 
-        Log.d(TAG, "sendMessage(): messageType=" + messageType + "; id=" + id + "; title=" + title + "; body=" + body + "; sound=" + sound + "; vibrate=" + vibrate + "; color=" + color + "; icon=" + icon + "; channel=" + channelId + "; data=" + data.toString());
+        Log.d(
+            TAG,
+            "sendMessage(): messageType=" +
+            messageType +
+            "; id=" +
+            id +
+            "; title=" +
+            title +
+            "; body=" +
+            body +
+            "; sound=" +
+            sound +
+            "; vibrate=" +
+            vibrate +
+            "; color=" +
+            color +
+            "; icon=" +
+            icon +
+            "; channel=" +
+            channelId +
+            "; data=" +
+            data.toString()
+        );
         Bundle bundle = new Bundle();
         for (String key : data.keySet()) {
             bundle.putString(key, data.get(key));
