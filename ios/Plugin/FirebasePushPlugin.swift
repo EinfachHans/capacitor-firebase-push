@@ -2,6 +2,7 @@ import Foundation
 import Capacitor
 
 import FirebaseMessaging
+import FirebaseInstallations
 import FirebaseCore
 
 @objc(FirebasePushPlugin)
@@ -33,6 +34,18 @@ public class FirebasePushPlugin: CAPPlugin, MessagingDelegate {
         self.savedRegisterCall = call;
         DispatchQueue.main.async {
             UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+    
+    @objc func unregister(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            Installations.installations().delete { error in
+              if let error = error {
+                call.reject(error.localizedDescription)
+                return
+              }
+                call.resolve()
+            }
         }
     }
     

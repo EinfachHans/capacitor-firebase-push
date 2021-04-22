@@ -30,6 +30,7 @@ Please consider donating if you're using this plugin in an app that makes you mo
   - [checkPermissions()](#checkpermissions)
   - [requestPermissions()](#requestpermissions)
   - [register()](#register)
+  - [unregister()](#unregister)
   - [addListener('token', ...)](#addlistenertoken-)
   - [addListener('message', ...)](#addlistenermessage-)
   - [removeAllListeners()](#removealllisteners)
@@ -140,6 +141,7 @@ These fields can be overwritten if you pass `create_notification: true` in the d
 * [`checkPermissions()`](#checkpermissions)
 * [`requestPermissions()`](#requestpermissions)
 * [`register()`](#register)
+* [`unregister()`](#unregister)
 * [`addListener('token', ...)`](#addlistenertoken-)
 * [`addListener('message', ...)`](#addlistenermessage-)
 * [`removeAllListeners()`](#removealllisteners)
@@ -157,6 +159,10 @@ These fields can be overwritten if you pass `create_notification: true` in the d
 checkPermissions() => Promise<PermissionStatus>
 ```
 
+Check permission to receive push notifications.
+
+Will always return "granted" on Android
+
 **Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
 
 --------------------
@@ -168,6 +174,10 @@ checkPermissions() => Promise<PermissionStatus>
 requestPermissions() => Promise<PermissionStatus>
 ```
 
+Request permission to receive push notifications.
+
+Will always return "granted" on Android
+
 **Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
 
 --------------------
@@ -178,6 +188,19 @@ requestPermissions() => Promise<PermissionStatus>
 ```typescript
 register() => Promise<void>
 ```
+
+Register the app to receive push notifications.
+
+--------------------
+
+
+### unregister()
+
+```typescript
+unregister() => Promise<void>
+```
+
+Should be called to unregister the Firebase Instance. For example if a User logs out.
 
 --------------------
 

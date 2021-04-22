@@ -3,6 +3,7 @@ package de.einfachhans.firebase;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -15,6 +16,8 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.annotation.Permission;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -39,15 +42,26 @@ public class FirebasePushPlugin extends Plugin {
 
     @PluginMethod
     public void register(PluginCall call) {
-        FirebaseApp.initializeApp(this.getContext());
-        registered = true;
-        this.sendStacked();
-        call.resolve();
+        new Handler().post(() -> {
+            FirebaseApp.initializeApp(this.getContext());
+            registered = true;
+            this.sendStacked();
+            call.resolve();
 
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                this.sendToken(task.getResult());
-            }
+            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    this.sendToken(task.getResult());
+                }
+            });
+        });
+
+    }
+
+    @PluginMethod
+    public void unregister(PluginCall call) {
+        new Handler().post(() -> {
+            FirebaseInstallations.getInstance().delete();
+            call.resolve();
         });
     }
 

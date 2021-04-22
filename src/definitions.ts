@@ -26,11 +26,29 @@ declare module '@capacitor/cli' {
 }
 
 export interface FirebasePushPlugin {
+  /**
+   * Check permission to receive push notifications.
+   *
+   * Will always return "granted" on Android
+   */
   checkPermissions(): Promise<PermissionStatus>;
 
+  /**
+   * Request permission to receive push notifications.
+   *
+   * Will always return "granted" on Android
+   */
   requestPermissions(): Promise<PermissionStatus>;
 
+  /**
+   * Register the app to receive push notifications.
+   */
   register(): Promise<void>;
+
+  /**
+   * Should be called to unregister the Firebase Instance. For example if a User logs out.
+   */
+  unregister(): Promise<void>;
 
   /**
    * Called when a new fcm token is created

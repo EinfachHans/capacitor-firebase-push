@@ -7,4 +7,5 @@ CAP_PLUGIN(FirebasePushPlugin, "FirebasePush",
            CAP_PLUGIN_METHOD(checkPermissions, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(requestPermissions, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(register, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(unregister, CAPPluginReturnPromise);
 )
