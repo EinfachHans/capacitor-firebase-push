@@ -1,3 +1,6 @@
+# 1.2.3
+- Fix IOS Methods not called
+
 # 1.2.2
 - Methods added to iOS File (dump dump dump 😩)
 

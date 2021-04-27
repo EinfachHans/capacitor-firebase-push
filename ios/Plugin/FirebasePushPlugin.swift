@@ -115,12 +115,12 @@ public class FirebasePushPlugin: CAPPlugin, MessagingDelegate {
         })
     }
 
-    @objc func getBadgeNumber(call: CAPPluginCall) {
+    @objc func getBadgeNumber(_ call: CAPPluginCall) {
         let badgeValue = UIApplication.shared.applicationIconBadgeNumber
         call.resolve(["count": badgeValue])
     }
 
-    @objc func setBadgeNumber(call: CAPPluginCall) {
+    @objc func setBadgeNumber(_ call: CAPPluginCall) {
         let badgeValue = call.getInt("count", 0)
         DispatchQueue.main.async {
             UIApplication.shared.applicationIconBadgeNumber = badgeValue
@@ -128,7 +128,7 @@ public class FirebasePushPlugin: CAPPlugin, MessagingDelegate {
         call.resolve()
     }
 
-    @objc func getDeliveredNotifications(call: CAPPluginCall) {
+    @objc func getDeliveredNotifications(_ call: CAPPluginCall) {
         UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
             call.resolve([
                 "notifications": notifications.map({ notification in
@@ -144,13 +144,13 @@ public class FirebasePushPlugin: CAPPlugin, MessagingDelegate {
         }
     }
 
-    @objc func removeDeliveredNotifications(call: CAPPluginCall) {
+    @objc func removeDeliveredNotifications(_ call: CAPPluginCall) {
         let ids = call.getArray("ids", String.self) ?? []
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ids)
         call.resolve()
     }
 
-    @objc func removeAllDeliveredNotifications(call: CAPPluginCall) {
+    @objc func removeAllDeliveredNotifications(_ call: CAPPluginCall) {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         call.resolve()
     }
