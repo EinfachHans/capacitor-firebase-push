@@ -8,4 +8,9 @@ CAP_PLUGIN(FirebasePushPlugin, "FirebasePush",
            CAP_PLUGIN_METHOD(requestPermissions, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(register, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(unregister, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(getBadgeValue, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(setBadgeValue, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(getDeliveredNotifications, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(removeDeliveredNotifications, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(removeAllDeliveredNotifications, CAPPluginReturnPromise);
 )

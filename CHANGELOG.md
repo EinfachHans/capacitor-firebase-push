@@ -1,3 +1,6 @@
+# 1.2.1
+- Methods added to iOS File (dump dump dump 😩)
+
 # 1.2.0
 - `getBadgeValue()` added
 - `setBadgeValue()` added
