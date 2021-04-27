@@ -130,7 +130,7 @@ public class FirebasePushNotificationsHandler: NSObject, NotificationHandlerProt
         }
         mutableUserInfo.setValue(tap, forKey: "tap")
         
-        if(mutableUserInfo.object(forKey: "messageType") != nil) {
+        if(mutableUserInfo.object(forKey: "messageType") == nil) {
             mutableUserInfo.setValue("notification", forKey: "messageType")
         }
         

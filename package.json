@@ -1,6 +1,6 @@
 {
   "name": "capacitor-firebase-push",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Capacitor Plugin for Firebase Push",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -25,7 +25,12 @@
   "keywords": [
     "capacitor",
     "plugin",
-    "native"
+    "native",
+    "firebase",
+    "push",
+    "fcm",
+    "data",
+    "silent"
   ],
   "scripts": {
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
