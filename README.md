@@ -20,7 +20,7 @@ Please consider donating if you're using this plugin in an app that makes you mo
 **Table of Content**
 
 - [Install](#install)
-- [Shutout ❤️](#shutout-)
+- [Shutout](#shutout)
 - [Setup](#setup)
   - [Android](#android)
   - [iOS](#ios)
@@ -31,6 +31,11 @@ Please consider donating if you're using this plugin in an app that makes you mo
   - [requestPermissions()](#requestpermissions)
   - [register()](#register)
   - [unregister()](#unregister)
+  - [getBadgeNumber()](#getbadgenumber)
+  - [setBadgeNumber(...)](#setbadgenumber)
+  - [getDeliveredNotifications()](#getdeliverednotifications)
+  - [removeDeliveredNotifications(...)](#removedeliverednotifications)
+  - [removeAllDeliveredNotifications()](#removealldeliverednotifications)
   - [addListener('token', ...)](#addlistenertoken-)
   - [addListener('message', ...)](#addlistenermessage-)
   - [removeAllListeners()](#removealllisteners)
@@ -47,7 +52,9 @@ npm install capacitor-firebase-push
 npx cap sync
 ```
 
-## Shutout ❤️
+## Shutout
+
+❤️
 
 This Plugin was created to match every requirement I had for my app. These Plugins helped my a lot to create this one:
 - [cordova-plugin-firebase-x](https://github.com/dpa99c/cordova-plugin-firebasex)
@@ -142,6 +149,11 @@ These fields can be overwritten if you pass `create_notification: true` in the d
 * [`requestPermissions()`](#requestpermissions)
 * [`register()`](#register)
 * [`unregister()`](#unregister)
+* [`getBadgeNumber()`](#getbadgenumber)
+* [`setBadgeNumber(...)`](#setbadgenumber)
+* [`getDeliveredNotifications()`](#getdeliverednotifications)
+* [`removeDeliveredNotifications(...)`](#removedeliverednotifications)
+* [`removeAllDeliveredNotifications()`](#removealldeliverednotifications)
 * [`addListener('token', ...)`](#addlistenertoken-)
 * [`addListener('message', ...)`](#addlistenermessage-)
 * [`removeAllListeners()`](#removealllisteners)
@@ -165,6 +177,8 @@ Will always return "granted" on Android
 
 **Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
 
+**Since:** 1.0.0
+
 --------------------
 
 
@@ -180,6 +194,8 @@ Will always return "granted" on Android
 
 **Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
 
+**Since:** 1.0.0
+
 --------------------
 
 
@@ -191,6 +207,8 @@ register() => Promise<void>
 
 Register the app to receive push notifications.
 
+**Since:** 1.0.0
+
 --------------------
 
 
@@ -201,6 +219,89 @@ unregister() => Promise<void>
 ```
 
 Should be called to unregister the Firebase Instance. For example if a User logs out.
+
+**Since:** 1.1.0
+
+--------------------
+
+
+### getBadgeNumber()
+
+```typescript
+getBadgeNumber() => Promise<BadgeCount>
+```
+
+Get icon badge Value
+
+Only available on iOS
+
+**Returns:** <code>Promise&lt;<a href="#badgecount">BadgeCount</a>&gt;</code>
+
+**Since:** 1.2.0
+
+--------------------
+
+
+### setBadgeNumber(...)
+
+```typescript
+setBadgeNumber(options: BadgeCount) => Promise<void>
+```
+
+Set icon badge Value
+
+Only available on iOS
+
+| Param         | Type                                              |
+| ------------- | ------------------------------------------------- |
+| **`options`** | <code><a href="#badgecount">BadgeCount</a></code> |
+
+**Since:** 1.2.0
+
+--------------------
+
+
+### getDeliveredNotifications()
+
+```typescript
+getDeliveredNotifications() => Promise<NotificationsResult>
+```
+
+Get notifications in Notification Center
+
+**Returns:** <code>Promise&lt;<a href="#notificationsresult">NotificationsResult</a>&gt;</code>
+
+**Since:** 1.2.0
+
+--------------------
+
+
+### removeDeliveredNotifications(...)
+
+```typescript
+removeDeliveredNotifications(options: NotificationsIds) => Promise<void>
+```
+
+Remove notifications from the notifications screen based on the id
+
+| Param         | Type                                                          |
+| ------------- | ------------------------------------------------------------- |
+| **`options`** | <code><a href="#notificationsids">NotificationsIds</a></code> |
+
+**Since:** 1.2.0
+
+--------------------
+
+
+### removeAllDeliveredNotifications()
+
+```typescript
+removeAllDeliveredNotifications() => Promise<void>
+```
+
+Remove all notifications from the notifications screen
+
+**Since:** 1.2.0
 
 --------------------
 
@@ -266,6 +367,27 @@ Remove all native listeners for this plugin.
 | Prop          | Type                                                        | Since |
 | ------------- | ----------------------------------------------------------- | ----- |
 | **`receive`** | <code><a href="#permissionstate">PermissionState</a></code> | 1.0.0 |
+
+
+#### BadgeCount
+
+| Prop        | Type                | Since |
+| ----------- | ------------------- | ----- |
+| **`count`** | <code>number</code> | 1.2.0 |
+
+
+#### NotificationsResult
+
+| Prop                | Type               | Since |
+| ------------------- | ------------------ | ----- |
+| **`notifications`** | <code>any[]</code> | 1.2.0 |
+
+
+#### NotificationsIds
+
+| Prop      | Type                  | Since |
+| --------- | --------------------- | ----- |
+| **`ids`** | <code>string[]</code> | 1.2.0 |
 
 
 #### PluginListenerHandle

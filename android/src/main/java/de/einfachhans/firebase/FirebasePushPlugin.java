@@ -1,12 +1,17 @@
 package de.einfachhans.firebase;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
 import android.util.Log;
 import com.getcapacitor.Bridge;
+import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -19,7 +24,11 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
+
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -33,8 +42,12 @@ public class FirebasePushPlugin extends Plugin {
     private static boolean registered = false;
     private static ArrayList<Bundle> notificationStack = null;
 
+    public NotificationManager notificationManager;
+
     @Override
     public void load() {
+        notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
         staticBridge = this.bridge;
     }
 
@@ -71,6 +84,76 @@ public class FirebasePushPlugin extends Plugin {
                     call.resolve();
                 }
             );
+    }
+
+    @PluginMethod
+    public void getDeliveredNotifications(PluginCall call) {
+        JSArray notifications = new JSArray();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            StatusBarNotification[] activeNotifications = notificationManager.getActiveNotifications();
+
+            for (StatusBarNotification notif : activeNotifications) {
+                JSObject jsNotif = new JSObject();
+
+                jsNotif.put("id", notif.getId());
+
+                Notification notification = notif.getNotification();
+                if (notification != null) {
+                    jsNotif.put("title", notification.extras.getCharSequence(Notification.EXTRA_TITLE));
+                    jsNotif.put("body", notification.extras.getCharSequence(Notification.EXTRA_TEXT));
+                    jsNotif.put("group", notification.getGroup());
+                    jsNotif.put("groupSummary", 0 != (notification.flags & Notification.FLAG_GROUP_SUMMARY));
+
+                    JSObject extras = new JSObject();
+
+                    for (String key : notification.extras.keySet()) {
+                        extras.put(key, notification.extras.get(key));
+                    }
+
+                    jsNotif.put("data", extras);
+                }
+
+                notifications.put(jsNotif);
+            }
+        }
+
+        JSObject result = new JSObject();
+        result.put("notifications", notifications);
+        call.resolve(result);
+    }
+
+    @PluginMethod
+    public void removeDeliveredNotifications(PluginCall call) {
+        JSArray notifications = call.getArray("ids");
+
+        List<Integer> ids = new ArrayList<>();
+        try {
+            ids = notifications.toList();
+        } catch (JSONException e) {
+            call.reject(e.getMessage());
+        }
+
+        for (int id : ids) {
+            notificationManager.cancel(id);
+        }
+
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void removeAllDeliveredNotifications(PluginCall call) {
+        notificationManager.cancelAll();
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void getBadgeNumber(PluginCall call) {
+        call.unimplemented("Not implemented on Android.");
+    }
+
+    @PluginMethod
+    public void setBadgeNumber(PluginCall call) {
+        call.unimplemented("Not implemented on Android.");
     }
 
     public void sendToken(String token) {

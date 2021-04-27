@@ -30,6 +30,8 @@ export interface FirebasePushPlugin {
    * Check permission to receive push notifications.
    *
    * Will always return "granted" on Android
+   *
+   * @since 1.0.0
    */
   checkPermissions(): Promise<PermissionStatus>;
 
@@ -37,18 +39,63 @@ export interface FirebasePushPlugin {
    * Request permission to receive push notifications.
    *
    * Will always return "granted" on Android
+   *
+   * @since 1.0.0
    */
   requestPermissions(): Promise<PermissionStatus>;
 
   /**
    * Register the app to receive push notifications.
+   *
+   * @since 1.0.0
    */
   register(): Promise<void>;
 
   /**
    * Should be called to unregister the Firebase Instance. For example if a User logs out.
+   *
+   * @since 1.1.0
    */
   unregister(): Promise<void>;
+
+  /**
+   * Get icon badge Value
+   *
+   * Only available on iOS
+   *
+   * @since 1.2.0
+   */
+  getBadgeNumber(): Promise<BadgeCount>;
+
+  /**
+   * Set icon badge Value
+   *
+   * Only available on iOS
+   *
+   * @since 1.2.0
+   */
+  setBadgeNumber(options: BadgeCount): Promise<void>;
+
+  /**
+   * Get notifications in Notification Center
+   *
+   * @since 1.2.0
+   */
+  getDeliveredNotifications(): Promise<NotificationsResult>;
+
+  /**
+   * Remove notifications from the notifications screen based on the id
+   *
+   * @since 1.2.0
+   */
+  removeDeliveredNotifications(options: NotificationsIds): Promise<void>;
+
+  /**
+   * Remove all notifications from the notifications screen
+   *
+   * @since 1.2.0
+   */
+  removeAllDeliveredNotifications(): Promise<void>;
 
   /**
    * Called when a new fcm token is created
@@ -83,6 +130,36 @@ export interface FirebasePushPlugin {
  */
 export interface TokenResult {
   token: string;
+}
+
+/**
+ * @since 1.2.0
+ */
+export interface BadgeCount {
+  /**
+   * @since 1.2.0
+   */
+  count: number;
+}
+
+/**
+ * @since 1.2.0
+ */
+export interface NotificationsResult {
+  /**
+   * @since 1.2.0
+   */
+  notifications: any[];
+}
+
+/**
+ * @since 1.2.0
+ */
+export interface NotificationsIds {
+  /**
+   * @since 1.2.0
+   */
+  ids: string[];
 }
 
 /**
