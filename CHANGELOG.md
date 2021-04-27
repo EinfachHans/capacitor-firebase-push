@@ -1,9 +1,9 @@
-# 1.2.1
+# 1.2.2
 - Methods added to iOS File (dump dump dump 😩)
 
 # 1.2.0
-- `getBadgeValue()` added
-- `setBadgeValue()` added
+- `setBadgeNumber()` added
+- `setBadgeNumber()` added
 - `getDeliveredNotifications()` added
 - `removeDeliveredNotifications()` added
 - `removeAllDeliveredNotifications()` added
