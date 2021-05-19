@@ -1,6 +1,6 @@
 {
   "name": "capacitor-firebase-push",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Capacitor Plugin for Firebase Push",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

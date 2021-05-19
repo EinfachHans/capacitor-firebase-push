@@ -1,3 +1,6 @@
+# 1.2.5
+- updates for Gradle 7
+
 # 1.2.4
 - Use 3.0.0 Capacitor Release
 
