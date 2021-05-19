@@ -24,14 +24,12 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
-
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import org.json.JSONException;
 
 @CapacitorPlugin(name = "FirebasePush", permissions = @Permission(strings = {}, alias = "receive"))
 public class FirebasePushPlugin extends Plugin {
