@@ -1,3 +1,6 @@
+# 1.2.6
+- reset variables on unregister
+
 # 1.2.5
 - updates for Gradle 7
 

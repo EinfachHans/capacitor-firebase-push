@@ -44,6 +44,8 @@ public class FirebasePushPlugin: CAPPlugin, MessagingDelegate {
                 call.reject(error.localizedDescription)
                 return
               }
+                self.savedRegisterCall = nil
+                self.registered = false
                 call.resolve()
             }
         }
