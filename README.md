@@ -98,11 +98,12 @@ After you updated the project (`npx cap update ios`), you have to add the follow
    ```swift
    import Firebase
    ```
-   
+
 2. Add the following two functions:
 
    ```swift
    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
         Messaging.messaging().token(completion: { (token, error) in
             if let error = error {
                 NotificationCenter.default.post(name: .capacitorDidFailToRegisterForRemoteNotifications, object: error)
@@ -111,12 +112,12 @@ After you updated the project (`npx cap update ios`), you have to add the follow
             }
         })
     }
-    
+
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NotificationCenter.default.post(name: Notification.Name.init("didReceiveRemoteNotification"), object: completionHandler, userInfo: userInfo)
     }
    ```
-   
+
 ## Config
 
 ### Push notification appearance in foreground
