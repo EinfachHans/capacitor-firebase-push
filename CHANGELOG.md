@@ -1,5 +1,3 @@
-#Changelog
-
 ## 1.2.6
 - reset variables on unregister
 
