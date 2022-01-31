@@ -1,3 +1,10 @@
+### [1.2.7](https://github.com/EinfachHans/capacitor-firebase-push/compare/V1.2.6...V1.2.7) (2022-01-31)
+
+
+### Bug Fixes
+
+* **ios:** correctly set Firebase apnsToken ([#4](https://github.com/EinfachHans/capacitor-firebase-push/issues/4)) ([51c0927](https://github.com/EinfachHans/capacitor-firebase-push/commit/51c0927d22c42855e963ec5ff2b3847f255f7d31))
+
 ## 1.2.6
 - reset variables on unregister
 
