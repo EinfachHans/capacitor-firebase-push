@@ -1,7 +1,7 @@
 module.exports = {
   branches: [
     {
-      name: 'master'
+      name: 'main'
     }
   ],
   tagFormat: 'V${version}',
