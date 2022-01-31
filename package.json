@@ -42,7 +42,7 @@
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
-    "docgen": "docgen --api FirebasePushPlugin --output-readme README.md --output-json dist/docs.json && doctoc readme.md --github --title '**Table of Content**' --maxlevel 3",
+    "docgen": "docgen --api FirebasePushPlugin --output-readme README.md --output-json dist/docs.json && doctoc README.md --github --title '**Table of Content**' --maxlevel 3",
     "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
