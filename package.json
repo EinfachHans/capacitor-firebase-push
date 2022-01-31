@@ -70,7 +70,8 @@
     "@semantic-release/exec": "6.0.1",
     "@semantic-release/git": "10.0.0",
     "@semantic-release/npm": "8.0.0",
-    "semantic-release": "19.0.2"
+    "semantic-release": "19.0.2",
+    "doctoc": "2.0.1"
   },
   "peerDependencies": {
     "@capacitor/core": "^3.0.0",
