@@ -98,8 +98,16 @@ After you updated the project (`npx cap update ios`), you have to add the follow
    ```swift
    import Firebase
    ```
+   
+   
+2. Add the Firebase configure to `didFinishLaunchingWithOptions` function:
 
-2. Add the following two functions:
+   ```swift
+   FirebaseApp.configure()
+   ```
+
+
+3. Add the following two functions:
 
    ```swift
    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -117,6 +125,8 @@ After you updated the project (`npx cap update ios`), you have to add the follow
         NotificationCenter.default.post(name: Notification.Name.init("didReceiveRemoteNotification"), object: completionHandler, userInfo: userInfo)
     }
    ```
+   
+Finally edit your `Info.plist` and add `FirebaseAppDelegateProxyEnabled` key to `NO`
 
 ## Config
 
