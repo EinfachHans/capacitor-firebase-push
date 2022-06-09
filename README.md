@@ -1,7 +1,11 @@
 # Capacitor Firebase Push
 
-![Maintenance](https://img.shields.io/maintenance/yes/2021)
+![Maintenance](https://img.shields.io/maintenance/no/2022)
 [![npm](https://img.shields.io/npm/v/capacitor-firebase-push)](https://www.npmjs.com/package/capacitor-firebase-push)
+
+### Deprecation Notice
+
+⚠️ This Plugin is deprecated and no more work will be done here! I recommend using this one instead: [Capacitor Firebase](https://github.com/robingenz/capacitor-firebase) ⚠️
 
 👉🏼 **Note**: this Plugin is developed for Capacitor V3
 
