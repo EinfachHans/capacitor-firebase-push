@@ -164,6 +164,10 @@ public class FirebasePushPlugin extends Plugin {
         String messageType = "data";
         String title = null;
         String body = null;
+        String titleLocKey = null;
+        String[] titleLocArgs = null;
+        String bodyLocKey = null;
+        String[] bodyLocArgs = null;
         String id = null;
         String sound = null;
         String vibrate = null;
@@ -179,6 +183,10 @@ public class FirebasePushPlugin extends Plugin {
             RemoteMessage.Notification notification = message.getNotification();
             title = notification.getTitle();
             body = notification.getBody();
+            titleLocKey = notification.getTitleLocalizationKey();
+            titleLocArgs = notification.getTitleLocalizationArgs();
+            bodyLocKey = notification.getBodyLocalizationKey();
+            bodyLocArgs = notification.getBodyLocalizationArgs();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 channelId = notification.getChannelId();
             }
@@ -202,7 +210,15 @@ public class FirebasePushPlugin extends Plugin {
             "; title=" +
             title +
             "; body=" +
-            body +
+            body + 
+            "; titleLocKey=" +
+            titleLocKey +
+            "; titleLocArgs=" +
+            titleLocArgs +
+            "; bodyLocKey=" +
+            bodyLocKey +
+            "; bodyLocArgs=" +
+            bodyLocArgs +
             "; sound=" +
             sound +
             "; vibrate=" +
@@ -224,6 +240,10 @@ public class FirebasePushPlugin extends Plugin {
         this.putKVInBundle("google.message_id", id, bundle);
         this.putKVInBundle("title", title, bundle);
         this.putKVInBundle("body", body, bundle);
+        this.putKVInBundle("titleLocKey", titleLocKey, bundle);
+        bundle.putStringArray("titleLocArgs", titleLocArgs);
+        this.putKVInBundle("bodyLocKey", bodyLocKey, bundle);
+        bundle.putStringArray("bodyLocArgs", bodyLocArgs);
         this.putKVInBundle("sound", sound, bundle);
         this.putKVInBundle("vibrate", vibrate, bundle);
         this.putKVInBundle("color", color, bundle);
